@@ -7,7 +7,7 @@ Route::get('/', function () {
 });
 
 Route::get('/about', function () {
-    return view('about', ['title' => 'About']);
+    return view('about', ['name' => 'Bayu Wicaksono', 'title' => 'About']);
 });
 
 Route::get('/blog', function () {
