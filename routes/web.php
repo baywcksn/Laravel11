@@ -1,34 +1,8 @@
 <?php
 
+use App\Models\Post;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Route;
-
-class Post
-{
-    public static function all()
-    {
-        return [
-
-            [
-                'id' => '1',
-                'slug' => 'biografi-bayu',
-                'title' => 'Biografi Bayu',
-                'author' => 'Bayu Wiaksono',
-                'body' => 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Minima minus inventore ex
-                    perspiciatis vero quibusdam ipsum necessitatibus rem aperiam libero! Ipsam velit esse asperiores tempora
-                    debitis quae modi quod repellat!'
-            ],
-            [
-                'id' => '2',
-                'slug' => 'biografi-santi',
-                'title' => 'Biografi Santi',
-                'author' => 'Santi Amel',
-                'body' => 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Minima minus inventore ex'
-            ]
-
-        ];
-    }
-}
 
 Route::get('/', function () {
     return view('home', ['title' => 'Home Page']);
@@ -43,29 +17,9 @@ Route::get('/posts', function () {
 });
 
 Route::get('/posts/{slug}', function ($slug) {
-    $posts =
-        [
-            [
-                'id' => '1',
-                'slug' => 'biografi-bayu',
-                'title' => 'Biografi Bayu',
-                'author' => 'Bayu Wiaksono',
-                'body' => 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Minima minus inventore ex
-            perspiciatis vero quibusdam ipsum necessitatibus rem aperiam libero! Ipsam velit esse asperiores tempora
-            debitis quae modi quod repellat!'
-            ],
-            [
-                'id' => '2',
-                'slug' => 'biografi-santi',
-                'title' => 'Biografi Santi',
-                'author' => 'Santi Amel',
-                'body' => 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Minima minus inventore ex'
-            ],
-        ];
 
-    $post = Arr::first($posts, function ($posts) use ($slug) {
-        return $posts['slug'] == $slug;
-    });
+    $post = Post::find($slug);
+
     return view('post', ['title' => 'Single Post', 'post' => $post]);
 });
 
